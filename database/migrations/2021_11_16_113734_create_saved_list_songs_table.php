@@ -15,8 +15,8 @@ class CreateSavedListSongsTable extends Migration
     {
         Schema::create('saved_list_songs', function (Blueprint $table) {
             $table->id();
-            // foreign key: saved_list_id
-            // foreign key: song_id
+            $table->foreignId('saved_list_id');
+            $table->foreignId('song_id');
             $table->timestamps();
         });
     }

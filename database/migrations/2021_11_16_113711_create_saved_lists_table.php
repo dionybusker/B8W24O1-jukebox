@@ -15,7 +15,7 @@ class CreateSavedListsTable extends Migration
     {
         Schema::create('saved_lists', function (Blueprint $table) {
             $table->id();
-            // foreign key: user_id
+            $table->foreignId('user_id');
             $table->string('name');
             $table->timestamps();
         });
