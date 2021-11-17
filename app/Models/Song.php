@@ -13,10 +13,8 @@ class Song extends Model
 
     public function genre()
     {
-        // Eloquent relationships
-        //hasOne, hasMany, belongsTo, belongsToMany
-
-        // does a song belongsTo a genre?
         return $this->belongsTo(Genre::class);
     }
+
+
 }
