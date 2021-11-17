@@ -1,8 +1,4 @@
-<!doctype html>
-
-<title>Jukebox</title>
-
-<body>
+<x-layout>
     <h1>Jukebox</h1>
 
     <ul>
@@ -13,4 +9,5 @@
         @endforeach
     </ul>
 
-</body>
+    <a href="/songs">Go to Songs</a>
+</x-layout>
