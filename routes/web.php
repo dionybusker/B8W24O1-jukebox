@@ -2,6 +2,7 @@
 
 use App\Models\Genre;
 use App\Models\Song;
+use App\Http\Controllers\SavedListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,19 +17,46 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/genres', function () {
     return view('genres', [
         'genres' => Genre::all()
     ]);
-});
+})->name('genres');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+
 
 Route::get('/songs', function () {
     return view('songs', [
-        'songs' => Song::with('genre')->get()
+        'songs' => Song::with('genre')->get(),
+        'genres' => Genre::all(),
     ]);
-});
+})->name('songs');
 
 Route::get('genres/{genre}', function (Genre $genre) {
     return view('songs', [
         'songs' => $genre->songs
     ]);
 });
+
+Route::get('/playlists', function () {
+    return view('playlists', [
+        'songs' => Song::all(),
+        'genres' => Genre::all()
+    ]);
+})->name('playlists');
+
+//Route::get("/songs/add/{song}", [
+//    SavedListController::class, 'store'
+//]);
+
+Route::get('/songs/{id}', [SavedListController::class, 'create']);
+Route::post('/songs/{id}', [SavedListController::class, 'session']);
