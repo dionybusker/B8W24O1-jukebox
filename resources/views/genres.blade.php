@@ -1,10 +1,16 @@
-<x-layout>
-    <section class="container w-full bg-gray-100 shadow-md">
-        <div class="px-10 py-8">
-            <div class="flex justify-center mx-auto text-xl font-semibold mb-5">Genres</div>
+<x-app-layout>
+    <x-slot name="header">
+        {{--        @include('_header')--}}
 
-            <div class="flex justify-center mx-auto">
-                <div class="flex flex-col">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Songs') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
                     <div class="w-full">
                         <div class="border-b border-gray-200 shadow">
                             <x-table.table :headers="['ID', 'Name', 'Find songs']">
@@ -23,5 +29,5 @@
                 </div>
             </div>
         </div>
-    </section>
-</x-layout>
+    </div>
+</x-app-layout>
