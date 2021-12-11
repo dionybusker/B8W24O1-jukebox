@@ -3,6 +3,7 @@
 use App\Models\Genre;
 use App\Models\Song;
 use App\Http\Controllers\SavedListController;
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,13 @@ Route::get('genres/{genre}', function (Genre $genre) {
     ]);
 });
 
+Route::get('/queuelist', function () {
+    return view('queuelist', [
+        'songs' => Song::all(),
+        'genres' => Genre::all()
+    ]);
+})->name('queuelist');
+
 Route::get('/playlists', function () {
     return view('playlists', [
         'songs' => Song::all(),
@@ -60,3 +68,7 @@ Route::get('/playlists', function () {
 
 Route::get('/songs/{id}', [SavedListController::class, 'create']);
 Route::post('/songs/{id}', [SavedListController::class, 'session']);
+
+//Route::get('/songs/{id}', [SongController::class, 'create']);
+//Route::post('/songs/{id}', [SongController::class, 'store']);
+
