@@ -57,7 +57,7 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 @if (Route::has('login'))
                     @auth
                         <form method="POST" action="{{ route('logout') }}">
