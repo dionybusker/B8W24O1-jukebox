@@ -33,7 +33,21 @@ class SavedListController extends Controller
 
         public function session(Request $request)
         {
-             new Playlist('test');
+             $list = new Playlist;
+
+//            $data = Song::get()->where('id', $request->id);
+            $data = Song::find($request->id);
+
+            $song = [
+                'songId' => $data->id,
+                'name' => $data->name,
+                'genre' => $data->genre->name,
+                'artist' => $data->artist,
+                'duration' => $data->duration
+            ];
+
+//             dd($data);
+             $list->addSong($song);
 
 //            Session::put('song', $request->all());
 //            $data = Song::get()->where('id', $request->id);
