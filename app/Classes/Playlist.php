@@ -22,10 +22,10 @@ class Playlist {
 
     public function add($data) {
         // push array into array ($songs)
+//        dd($this->songs);
+        Session::push('list', $data);
 
-        array_push($this->songs, $data);
-
-        $this->update();
+//        $this->update();
     }
 
     public function update() {

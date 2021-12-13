@@ -35,16 +35,22 @@ class SavedListController extends Controller
         {
             // store into a session
 
+//            $data = Song::get()->where('id', $request->id);
+            $data = Song::find($request->id);
+
+//            dd($data->genre->name);
             $song = [
-                'songId' => $request->id,
-                'genreId' => $request->genre_id,
-                'title' => $request->name,
-                'artist' => $request->artist,
-                'duration' => $request->duration
+                'song_id' => $data->id,
+                'genre_id' => $data->genre_id,
+                'name' => $data->name,
+                'artist' => $data->artist,
+                'duration' => $data->duration
             ];
 
-            $session = new Playlist('temp', ['song 1', 'song 2', 'song 3']);
-            $session->add($session);
+//            if (!$request->session()->exists('list')) {
+                $session = new Playlist('temp', $song);
+                $session->add($song);
+//            }
 
             return redirect('songs');
         }
