@@ -6,24 +6,65 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class Playlist {
-    private $name;
-    private $songsList = [];
+    // Playlist will be used for sessions AND for saved playlists!
 
-    public function __construct() {
-        if (Session::get('list') != null) {
-            $this->name = Session::get('list'[0]);
-//            $this->name = 'name';
-            $this->songsList = Session::get('list'[1]);
-//            $this->songsList = 'test';
-        }
+    private $name; // name of the playlist
+    private $songs = [];
+
+    // list of songs in corresponding playlist
+
+    // Playlist that is made by a guest, will have a default name
+
+    public function __construct($name, $songs) {
+        $this->name = $name;
+        $this->songs = $songs;
     }
 
-    public function updateSession() {
-        Session::put('list', [$this->name, $this->songsList]);
+    public function add($data) {
+        // push array into array ($songs)
+
+        array_push($this->songs, $data);
+
+        $this->update();
     }
 
-    public function addSong($data) {
-        array_push($this->songsList, $data);
-        $this->updateSession();
+    public function update() {
+        // update current session
+        Session::put('list', [
+            $this->name,
+            $this->songs
+        ]);
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed|string $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSongs(): array
+    {
+        return $this->songs;
+    }
+
+    /**
+     * @param array $songs
+     */
+    public function setSongs(array $songs): void
+    {
+        $this->songs = $songs;
     }
 }
