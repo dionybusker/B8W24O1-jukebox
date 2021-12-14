@@ -68,6 +68,8 @@ Route::get('/playlists', function () {
 
 Route::get('/songs/{id}', [SavedListController::class, 'create']);
 Route::post('/songs/{id}', [SavedListController::class, 'session']);
+Route::get('/queuelist/{id}', [SavedListController::class, 'create']);
+Route::post('/queuelist/{id}', [SavedListController::class, 'delete']);
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);
 //Route::post('/songs/{id}', [SongController::class, 'store']);

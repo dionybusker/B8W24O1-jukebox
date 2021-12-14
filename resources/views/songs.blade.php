@@ -27,7 +27,7 @@
                                         <p>{{ $song->duration }} minutes</p>
                                     </div>
 
-                                    <form method="post" action="{{ route('songs') }}/{{ $song->id }}">
+                                    <form action="{{ route('songs') }}/{{ $song->id }}" method="post">
                                         @csrf
                                         <div class="w-full flex text-sm uppercase font-semibold">
     {{--                                         href="/songs/add/{{ $song->id }}" --}}

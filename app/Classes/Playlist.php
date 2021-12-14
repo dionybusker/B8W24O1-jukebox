@@ -16,25 +16,32 @@ class Playlist {
     // Playlist that is made by a guest, will have a default name
 
     public function __construct($name, $songs) {
+//        dd(Session::get('list')[0]);
+
         $this->name = $name;
         $this->songs = $songs;
     }
 
-    public function add($data) {
+    public function addSong($data) { // add song to session
         // push array into array ($songs)
-//        dd($this->songs);
-        Session::push('list', $data);
 
-//        $this->update();
+        if (Session::exists('list')) {
+            Session::push('list', $data);
+        } else {
+            $this->updateSession();
+        }
+
+//        $this->updateSession();
     }
 
-    public function update() {
+    public function updateSession() { // update current session
         // update current session
         Session::put('list', [
             $this->name,
             $this->songs
         ]);
     }
+
 
     /**
      * @return mixed|string

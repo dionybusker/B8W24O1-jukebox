@@ -38,6 +38,8 @@ class SavedListController extends Controller
 //            $data = Song::get()->where('id', $request->id);
             $data = Song::find($request->id);
 
+//            $songId = $data->id;
+
 //            dd($data->genre->name);
             $song = [
                 'song_id' => $data->id,
@@ -49,9 +51,22 @@ class SavedListController extends Controller
 
 //            if (!$request->session()->exists('list')) {
                 $session = new Playlist('temp', $song);
-                $session->add($song);
+                $session->addSong($song);
 //            }
 
             return redirect('songs');
+        }
+
+        public function delete (Request $request) {
+//            $data = Song::find($request->id);
+
+//            $song = Session::get('list');
+
+//            $request->session()->forget($data);
+
+//            dd($song);
+
+//            $session = Session::get('list');
+//            $session->delete($session);
         }
 }
