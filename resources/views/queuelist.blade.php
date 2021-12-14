@@ -8,15 +8,15 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    Hier wordt de wachtrij weergegeven
+                <div class="bg-white border-b border-gray-200">
+                    @if (Session::has('list'))
 
 {{--            {{ dd(Session::get('list')) }}--}}
-                    @if (Session::has('list'))
-                        <div class="flex justify-center mx-auto">
-                            <div class="flex flex-col">
-                                <div class="w-full">
-                                    <div class="border-b border-gray-200 shadow">
+
+{{--                        <div class="flex justify-center mx-auto">--}}
+{{--                            <div class="flex flex-col">--}}
+{{--                                <div class="w-full">--}}
+{{--                                    <div class="border-b border-gray-200 shadow">--}}
                                         <x-table.table :headers="['Name', 'Genre', 'Artist', 'Duration', 'Remove from queue']">
                                             @foreach (Session::get('list') as $song)
                                                 @if ($loop->first) @continue @endif
@@ -38,10 +38,12 @@
                                                     </tr>
                                             @endforeach
                                         </x-table.table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                    @else
+                        Hier wordt de wachtrij weergegeven
                     @endif
                 </div>
             </div>
