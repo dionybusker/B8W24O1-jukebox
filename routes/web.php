@@ -66,10 +66,10 @@ Route::get('/playlists', function () {
 //    SavedListController::class, 'store'
 //]);
 
-Route::get('/songs/{id}', [SavedListController::class, 'create']);
-Route::post('/songs/{id}', [SavedListController::class, 'session']);
-Route::get('/queuelist/{id}', [SavedListController::class, 'create']);
-Route::post('/queuelist/{id}', [SavedListController::class, 'delete']);
+Route::get('/songs/{songId}', [SavedListController::class, 'create']);
+Route::post('/songs/{songId}', [SavedListController::class, 'session']);
+Route::get('/queuelist/{songId}', [SavedListController::class, 'create']);
+Route::post('/queuelist/delete/{songId}', [SavedListController::class, 'delete']);
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);
 //Route::post('/songs/{id}', [SongController::class, 'store']);

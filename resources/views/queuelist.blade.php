@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white border-b border-gray-200">
-                    @if (Session::has('list'))
+
 
 {{--            {{ dd(Session::get('list')) }}--}}
 
@@ -18,33 +18,41 @@
 {{--                                <div class="w-full">--}}
 {{--                                    <div class="border-b border-gray-200 shadow">--}}
                                         <x-table.table :headers="['Name', 'Genre', 'Artist', 'Duration', 'Remove from queue']">
-                                            @foreach (Session::get('list') as $song)
-                                                @if ($loop->first) @continue @endif
-{{--                                                {{dd($song)}}--}}
-                                                    <tr class="whitespace-nowrap">
-        {{--                                                {{ dd($song) }}--}}
-                                                        <x-table.td>{{ $song['name'] }}</x-table.td>
-                                                        <x-table.td>{{ $song['genre_id'] }}</x-table.td>
-                                                        <x-table.td>{{ $song['artist'] }}</x-table.td>
-                                                        <x-table.td>{{ $song['duration'] }}</x-table.td>
-                                                        <x-table.td>
-                                                            <form action="{{ route('queuelist') }}/{{ $song['song_id'] }}" method="post">
-                                                                @csrf
-                                                                <button class="w-1/2 bg-red-600 hover:bg-red-500 rounded roundedn-md text-white text-center py-1">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </form>
-                                                        </x-table.td>
-                                                    </tr>
-                                            @endforeach
+                                            @if (Session::has('list'))
+                                                @foreach ($songs as $song)
+                                                    @foreach (Session::get('list') as $listItem)
+
+                                                        @if ($listItem == $song['id'])
+        {{--                                                {{ dd($loop) }}--}}
+        {{--                                                @if ($loop->first) @continue @endif--}}
+        {{--                                                {{dd($song)}}--}}
+                                                            <tr class="whitespace-nowrap">
+                {{--                                                {{ dd($song) }}--}}
+                                                                <x-table.td>{{ $song->name }}</x-table.td>
+                                                                <x-table.td>{{ $song->genre->name }}</x-table.td>
+                                                                <x-table.td>{{ $song->artist }}</x-table.td>
+                                                                <x-table.td>{{ $song->duration }}</x-table.td>
+                                                                <x-table.td>
+                                                                    <form action="queuelist/delete/{{ $song['id'] }}" method="post">
+                                                                        @csrf
+                                                                        <button class="w-1/2 bg-red-600 hover:bg-red-500 rounded rounded-md text-white text-center py-1">
+                                                                            <i class="fas fa-trash-alt"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </x-table.td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
                                         </x-table.table>
 {{--                                    </div>--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
-                    @else
-                        Hier wordt de wachtrij weergegeven
-                    @endif
+{{--                    @else--}}
+{{--                        Hier wordt de wachtrij weergegeven--}}
+{{--                    @endif--}}
                 </div>
             </div>
         </div>

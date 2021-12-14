@@ -8,79 +8,33 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use App\Models\Song;
 use App\Http\Controllers\Controller;
-//use App\Classes\Playlist;
 
 class SavedListController extends Controller
 {
-//    public function store(Request $request)
-//    {
-//        Session::put('song', $request->all());
-//
-//        return $request->session()->all();
-//    }
-
-
         public function create()
         {
             return view('songs');
         }
-
 
         public function store()
         {
             // store into database
         }
 
-        public function session(Request $request)
+        public function session($songId)
         {
-            // store into a session
-
-//            $data = Song::get()->where('id', $request->id);
-            $data = Song::find($request->id);
-
-//            $songId = $data->id;
-
-//            dd($data->genre->name);
-            $song = [
-                'song_id' => $data->id,
-                'genre_id' => $data->genre_id,
-                'name' => $data->name,
-                'artist' => $data->artist,
-                'duration' => $data->duration
-            ];
-
-//            if (!$request->session()->exists('list')) {
-                $session = new Playlist('temp', $song);
-                $session->addSong($song);
-//            }
+            $playlist = new Playlist();
+            $playlist->addSong($songId);
 
             return redirect('songs');
         }
 
-        public function delete (Request $request) {
-            $data = Song::find($request->id);
+        public function delete($songId)
+        {
+            $playlist = new Playlist();
 
-            $songs = Session::get('list');
+            $playlist->delete($songId);
 
-//            dd($songs);
-
-//            foreach ($songs as $song) {
-//                dd($song);
-
-                if ($songs['song_id'] == $data->id) {
-                    dd($songs);
-                }
-//            }
-
-
-
-//            $song = Session::get('list');
-
-//            $request->session()->forget($data);
-
-//            dd($song);
-
-//            $session = Session::get('list');
-//            $session->delete($session);
+            return redirect('queuelist');
         }
 }
