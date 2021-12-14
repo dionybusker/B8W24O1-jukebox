@@ -58,7 +58,21 @@ class SavedListController extends Controller
         }
 
         public function delete (Request $request) {
-//            $data = Song::find($request->id);
+            $data = Song::find($request->id);
+
+            $songs = Session::get('list');
+
+//            dd($songs);
+
+//            foreach ($songs as $song) {
+//                dd($song);
+
+                if ($songs['song_id'] == $data->id) {
+                    dd($songs);
+                }
+//            }
+
+
 
 //            $song = Session::get('list');
 
