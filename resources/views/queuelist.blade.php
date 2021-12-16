@@ -1,8 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Queuelist') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="inline-block font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Queuelist') }}
+            </h2>
+
+            @auth
+                <div>
+                    <button class="block lg:inline-block lg:text-center lg:text-white lg:mt-0 lg:ml-3 lg:px-3 lg:py-1 pl-2 py-3 rounded lg:uppercase lg:text-xs lg:font-semibold lg:bg-blue-600 lg:hover:bg-blue-500 lg:hover:text-white hover:bg-gray-200 hover:text-gray-800">
+                        <a href="{{ route('save-list') }}">
+                            {{ __('Save as playlist') }}
+                        </a>
+                    </button>
+                </div>
+            @endauth
+        </div>
+
     </x-slot>
 
     <div class="py-12">
