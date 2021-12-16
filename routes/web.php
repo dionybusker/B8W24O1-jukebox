@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-
+//Route::get('/songs', [SongController::class, 'index'])->name('songs');
 Route::get('/songs', function () {
     return view('songs', [
         'songs' => Song::with('genre')->get(),
