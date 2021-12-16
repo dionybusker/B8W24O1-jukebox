@@ -20,7 +20,17 @@ class SavedListController extends Controller
 
         public function store(Request $request)
         {
+            //dd($request->session());
+            dd(Song::class);
             // store into database
+
+            $list = Session::pull('list');
+
+            $key = array_search($request->id, $list);
+
+            if ($key !== false) {
+                $listSong = $list[$key];
+            }
 
             // store into 'saved_lists'
             $request->validate([
@@ -36,7 +46,7 @@ class SavedListController extends Controller
                 // saved_list_id
                 'saved_list_id' => $savedList->id,
                 // song_id
-                'song_id' => $request->session('list')
+                'song_id' => $listSong
 //                'song_id' => '1'
             ]);
 
