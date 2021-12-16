@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(5)->create();
-        Song::factory(3)->create();
+//        Song::factory(3)->create();
+//        Genre::factory()->create();
+
+        $this->call([
+            GenreSeeder::class,
+            SongSeeder::class
+        ]);
     }
 }
