@@ -30,7 +30,7 @@
 {{--                            <div class="flex flex-col">--}}
 {{--                                <div class="w-full">--}}
 {{--                                    <div class="border-b border-gray-200 shadow">--}}
-                                        <x-table.table :headers="['Name', 'Genre', 'Artist', 'Duration', 'Remove from queue']">
+                                        <x-table.table :headers="['Name', 'Genre', 'Artist', 'Length', 'Remove from queue']">
                                             @if (Session::has('list'))
                                                 @foreach ($songs as $song)
                                                     @foreach (Session::get('list') as $listItem)
@@ -44,7 +44,7 @@
                                                                 <x-table.td>{{ $song->name }}</x-table.td>
                                                                 <x-table.td>{{ $song->genre->name }}</x-table.td>
                                                                 <x-table.td>{{ $song->artist }}</x-table.td>
-                                                                <x-table.td>{{ $song->duration }}</x-table.td>
+                                                                <x-table.td>{{ $song->length }}</x-table.td>
                                                                 <x-table.td>
                                                                     <form action="queuelist/delete/{{ $song['id'] }}" method="post">
                                                                         @csrf

@@ -18,14 +18,14 @@ class SongController extends Controller
 //            'genre_id' => ['required', 'int'],
 //            'name' => ['required', 'string', 'max:255'],
 //            'artist' => ['required', 'string', 'max:255'],
-//            'duration' => ['required', 'int'],
+//            'length' => ['required', 'int'],
 //        ]);
 //
 //        Song::create([
 //            'genre_id' => $request->genre_id,
 //            'name' => $request->name,
 //            'artist' => $request->artist,
-//            'duration' => $request->duration,
+//            'length' => $request->duration,
 //        ]);
 //
 //        return redirect(RouteServiceProvider::HOME);

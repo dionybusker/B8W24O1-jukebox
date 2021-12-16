@@ -24,7 +24,7 @@
                                     <div class="px-4 py-2 overflow-auto h-40">
                                         <p class="font-semibold">{{ $song->name }}</p>
                                         <p>{{ $song->artist }}</p>
-                                        <p>{{ $song->duration }} minutes</p>
+                                        <p>{{ $song->length }} minutes</p>
                                     </div>
 
                                     <form action="{{ route('songs') }}/{{ $song->id }}" method="post">

@@ -19,7 +19,7 @@ class SongFactory extends Factory
             'genre_id' => Genre::factory(),
             'name' => $this->faker->sentence(),
             'artist' => $this->faker->name(),
-            'duration' => $this->faker->numberBetween(1,10)
+            'length' => $this->faker->numberBetween(1,10)
         ];
     }
 }
