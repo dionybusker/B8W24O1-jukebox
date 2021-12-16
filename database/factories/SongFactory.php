@@ -15,6 +15,7 @@ class SongFactory extends Factory
     public function definition()
     {
         return [
+//            'genre_id' => GenreSeeder::class,
             'genre_id' => Genre::factory(),
             'name' => $this->faker->sentence(),
             'artist' => $this->faker->name(),
