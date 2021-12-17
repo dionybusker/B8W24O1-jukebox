@@ -66,7 +66,7 @@
                             <button class="block lg:inline-block lg:text-center lg:w-20 lg:mt-0 lg:px-3 lg:py-1 pl-2 py-3 rounded lg:uppercase lg:text-xs lg:font-semibold lg:hover:bg-red-600 lg:hover:text-white hover:bg-gray-200 hover:text-gray-800"
                                 onclick="event.preventDefault();
                                              this.closest('form').submit();">
-                                <a :href="route('logout')">
+                                <a href="{{ route('logout') }}">
                                     {{ __('Log out') }}
                                 </a>
                             </button>
