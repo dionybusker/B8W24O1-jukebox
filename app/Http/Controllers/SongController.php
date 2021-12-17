@@ -10,10 +10,15 @@ class SongController extends Controller
 {
 //    public function index() {
 //        $songs = DB::table('songs')->get();
-//        //dd($songs);
+////        dd($songs->id);
 //
-//
-//        $genres = DB::table('genres')->get()->where('id', $songs->genre_id);
+////        $genres = [];
+////
+////        foreach ($songs as $song) {
+//////            dd($song);
+////
+////            $genres = DB::table('genres')->where('id', $song->genre_id)->get();
+////        }
 //
 //        return view('songs', [
 //            'songs' => $songs,
