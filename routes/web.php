@@ -34,6 +34,7 @@ require __DIR__.'/auth.php';
 Route::get('/genres', [GenreController::class, 'index'])->name('genres');
 Route::get('/songs', [SongController::class, 'index'])->name('songs');
 Route::get('/queuelist', [QueuelistController::class, 'index'])->name('queuelist');
+Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
 
 Route::get('genres/{genre}', function (Genre $genre) {
     return view('songs', [
@@ -42,13 +43,13 @@ Route::get('genres/{genre}', function (Genre $genre) {
 });
 
 
-Route::get('/playlists', function () {
-    return view('playlists', [
-//        'songs' => Song::all(),
-//        'genres' => Genre::all()
-        'playlists' => Playlist::all()
-    ]);
-})->name('playlists');
+//Route::get('/playlists', function () {
+//    return view('playlists', [
+////        'songs' => Song::all(),
+////        'genres' => Genre::all()
+//        'playlists' => Playlist::all()
+//    ]);
+//})->name('playlists');
 
 //Route::get("/songs/add/{song}", [
 //    PlaylistController::class, 'store'

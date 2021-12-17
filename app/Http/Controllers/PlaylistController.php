@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\PlaylistClass;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
@@ -13,55 +14,67 @@ use App\Http\Controllers\Controller;
 
 class PlaylistController extends Controller
 {
-        public function create()
-        {
-            return view('songs');
-        }
+    public function index() {
+//        $songs = Song::get();
+//        $genres = Genre::get();
+        $playlists = Playlist::get();
 
-        public function store(Request $request)
-        {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-            ]);
+        return view('playlists', [
+            //'songs' => $songs,
+            //'genres' => $genres,
+            'playlists' => $playlists
+        ]);
+    }
 
-            $playlist = Playlist::create([
-                'user_id' => $request->user()->id,
-                'name' => $request->name,
-            ]);
+    public function create()
+    {
+        return view('songs');
+    }
 
-            $list = Session::pull('list');
-            $songs = Song::get();
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
 
-            foreach ($songs as $song) {
-                $key = array_search($song->id, $list);
+        $playlist = Playlist::create([
+            'user_id' => $request->user()->id,
+            'name' => $request->name,
+        ]);
 
-                if ($key !== false) {
-                    $listSong = $list[$key];
+        $list = Session::pull('list');
+        $songs = Song::get();
 
-                    PlaylistSong::create([
-                        'playlist_id' => $playlist->id,
-                        'song_id' => $listSong,
-                    ]);
-                }
+        foreach ($songs as $song) {
+            $key = array_search($song->id, $list);
+
+            if ($key !== false) {
+                $listSong = $list[$key];
+
+                PlaylistSong::create([
+                    'playlist_id' => $playlist->id,
+                    'song_id' => $listSong,
+                ]);
             }
-
-            return redirect('playlists');
         }
 
-        public function session($songId)
-        {
-            $playlist = new PlaylistClass();
-            $playlist->addSong($songId);
+        return redirect('playlists');
+    }
 
-            return redirect('songs');
-        }
+    public function session($songId)
+    {
+        $playlist = new PlaylistClass();
+        $playlist->addSong($songId);
 
-        public function delete($songId)
-        {
-            $playlist = new PlaylistClass();
+        return redirect('songs');
+    }
 
-            $playlist->delete($songId);
+    public function delete($songId)
+    {
+        $playlist = new PlaylistClass();
 
-            return redirect('queuelist');
-        }
+        $playlist->delete($songId);
+
+        return redirect('queuelist');
+    }
 }
