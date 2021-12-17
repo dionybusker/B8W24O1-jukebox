@@ -8,23 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
-//    public function index() {
-//        $songs = DB::table('songs')->get();
-////        dd($songs->id);
-//
-////        $genres = [];
-////
-////        foreach ($songs as $song) {
-//////            dd($song);
-////
-////            $genres = DB::table('genres')->where('id', $song->genre_id)->get();
-////        }
-//
-//        return view('songs', [
-//            'songs' => $songs,
-//            'genres' => $genres
-//        ]);
-//    }
+    public function index() {
+        $songs = Song::with('genre')->paginate(12);
+
+        return view('songs', [
+            'songs' => $songs
+        ]);
+    }
 
 //    public function create()
 //    {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Genre;
+use App\Models\Playlist;
 use App\Models\Song;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\SongController;
@@ -34,13 +35,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-//Route::get('/songs', [SongController::class, 'index'])->name('songs');
-Route::get('/songs', function () {
-    return view('songs', [
-        'songs' => Song::with('genre')->get(),
-        'genres' => Genre::all(),
-    ]);
-})->name('songs');
+Route::get('/songs', [SongController::class, 'index'])->name('songs');
 
 Route::get('genres/{genre}', function (Genre $genre) {
     return view('songs', [
@@ -57,8 +52,9 @@ Route::get('/queuelist', function () {
 
 Route::get('/playlists', function () {
     return view('playlists', [
-        'songs' => Song::all(),
-        'genres' => Genre::all()
+//        'songs' => Song::all(),
+//        'genres' => Genre::all()
+        'playlists' => Playlist::all()
     ]);
 })->name('playlists');
 
@@ -77,6 +73,8 @@ Route::post('/songs/{songId}', [PlaylistController::class, 'session']);
 Route::get('/queuelist/{songId}', [PlaylistController::class, 'create']);
 Route::post('/queuelist/delete/{songId}', [PlaylistController::class, 'delete']);
 
+//Route::get('/playlist/{playlistId}', [PlaylistController::class, 'create']);
+//Route::post('/playlist/delete/{playlistId}', [PlaylistController::class, 'delete']);
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);
 //Route::post('/songs/{id}', [SongController::class, 'store']);
