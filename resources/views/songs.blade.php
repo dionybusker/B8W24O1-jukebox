@@ -46,5 +46,10 @@
                 </div>
             @endforeach
         </div>
+
+        <div class="lg:w-2/3 w-full mx-auto items-center">
+            <!-- pagination -->
+            {{ $songs->links() }}
+        </div>
     </div>
 </x-app-layout>
