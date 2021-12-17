@@ -5,7 +5,7 @@ namespace App\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class Playlist {
+class PlaylistClass {
     private $songsList = [];
 
     public function __construct()

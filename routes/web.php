@@ -2,7 +2,7 @@
 
 use App\Models\Genre;
 use App\Models\Song;
-use App\Http\Controllers\SavedListController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,19 +63,19 @@ Route::get('/playlists', function () {
 })->name('playlists');
 
 //Route::get("/songs/add/{song}", [
-//    SavedListController::class, 'store'
+//    PlaylistController::class, 'store'
 //]);
 
 Route::get('/save-list', function() {
     return view('save-list');
 })->name('save-list');
 
-Route::post('/save-list', [SavedListController::class, 'store']);
+Route::post('/save-list', [PlaylistController::class, 'store']);
 
-Route::get('/songs/{songId}', [SavedListController::class, 'create']);
-Route::post('/songs/{songId}', [SavedListController::class, 'session']);
-Route::get('/queuelist/{songId}', [SavedListController::class, 'create']);
-Route::post('/queuelist/delete/{songId}', [SavedListController::class, 'delete']);
+Route::get('/songs/{songId}', [PlaylistController::class, 'create']);
+Route::post('/songs/{songId}', [PlaylistController::class, 'session']);
+Route::get('/queuelist/{songId}', [PlaylistController::class, 'create']);
+Route::post('/queuelist/delete/{songId}', [PlaylistController::class, 'delete']);
 
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);

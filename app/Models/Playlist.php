@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SavedListSong extends Model
+class Playlist extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function savedList()
+    public function user()
     {
-        return $this->belongsTo(SavedList::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function song()
+    public function playlistSong()
     {
-        return $this->hasMany(Song::class);
+        return $this->hasMany(PlaylistSong::class);
     }
 }

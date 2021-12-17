@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Playlist;
+use App\Classes\PlaylistClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use App\Models\Song;
-use App\Models\SavedList;
-use App\Models\SavedListSong;
+use App\Models\Playlist;
+use App\Models\PlaylistSong;
 use App\Http\Controllers\Controller;
 
-class SavedListController extends Controller
+class PlaylistController extends Controller
 {
         public function create()
         {
@@ -24,7 +24,7 @@ class SavedListController extends Controller
                 'name' => ['required', 'string', 'max:255'],
             ]);
 
-            $savedList = SavedList::create([
+            $playlist = Playlist::create([
                 'user_id' => $request->user()->id,
                 'name' => $request->name,
             ]);
@@ -38,8 +38,8 @@ class SavedListController extends Controller
                 if ($key !== false) {
                     $listSong = $list[$key];
 
-                    SavedListSong::create([
-                        'saved_list_id' => $savedList->id,
+                    PlaylistSong::create([
+                        'playlist_id' => $playlist->id,
                         'song_id' => $listSong,
                     ]);
                 }
@@ -50,7 +50,7 @@ class SavedListController extends Controller
 
         public function session($songId)
         {
-            $playlist = new Playlist();
+            $playlist = new PlaylistClass();
             $playlist->addSong($songId);
 
             return redirect('songs');
@@ -58,7 +58,7 @@ class SavedListController extends Controller
 
         public function delete($songId)
         {
-            $playlist = new Playlist();
+            $playlist = new PlaylistClass();
 
             $playlist->delete($songId);
 

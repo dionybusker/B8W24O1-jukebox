@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function savedList()
+    public function playlist()
     {
-        return $this->hasMany(SavedList::class);
+        return $this->hasMany(Playlist::class);
     }
 }
