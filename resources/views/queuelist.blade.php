@@ -15,57 +15,37 @@
                 </div>
             @endauth
         </div>
-
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white border-b border-gray-200">
+                    <x-table.table :headers="['Name', 'Genre', 'Artist', 'Length', 'Remove from queue']">
+                        @if (Session::has('list'))
+                            @foreach ($songs as $song)
+                                @foreach (Session::get('list') as $listItem)
 
-
-{{--            {{ dd(Session::get('list')) }}--}}
-
-{{--                        <div class="flex justify-center mx-auto">--}}
-{{--                            <div class="flex flex-col">--}}
-{{--                                <div class="w-full">--}}
-{{--                                    <div class="border-b border-gray-200 shadow">--}}
-                                        <x-table.table :headers="['Name', 'Genre', 'Artist', 'Length', 'Remove from queue']">
-                                            @if (Session::has('list'))
-                                                @foreach ($songs as $song)
-                                                    @foreach (Session::get('list') as $listItem)
-
-                                                        @if ($listItem == $song['id'])
-        {{--                                                {{ dd($loop) }}--}}
-        {{--                                                @if ($loop->first) @continue @endif--}}
-        {{--                                                {{dd($song)}}--}}
-                                                            <tr class="whitespace-nowrap">
-                {{--                                                {{ dd($song) }}--}}
-                                                                <x-table.td>{{ $song->name }}</x-table.td>
-                                                                <x-table.td>{{ $song->genre->name }}</x-table.td>
-                                                                <x-table.td>{{ $song->artist }}</x-table.td>
-                                                                <x-table.td>{{ $song->length }}</x-table.td>
-                                                                <x-table.td>
-                                                                    <form action="queuelist/delete/{{ $song['id'] }}" method="post">
-                                                                        @csrf
-                                                                        <button class="w-1/2 bg-red-600 hover:bg-red-500 rounded rounded-md text-white text-center py-1">
-                                                                            <i class="fas fa-trash-alt"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </x-table.td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                @endforeach
-                                            @endif
-                                        </x-table.table>
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        Hier wordt de wachtrij weergegeven--}}
-{{--                    @endif--}}
+                                    @if ($listItem == $song['id'])
+                                        <tr class="whitespace-nowrap">
+                                            <x-table.td>{{ $song->name }}</x-table.td>
+                                            <x-table.td>{{ $song->genre->name }}</x-table.td>
+                                            <x-table.td>{{ $song->artist }}</x-table.td>
+                                            <x-table.td>{{ $song->length }}</x-table.td>
+                                            <x-table.td>
+                                                <form action="queuelist/delete/{{ $song['id'] }}" method="post">
+                                                    @csrf
+                                                    <button class="w-1/2 bg-red-600 hover:bg-red-500 rounded rounded-md text-white text-center py-1">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                            </x-table.td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        @endif
+                    </x-table.table>
                 </div>
             </div>
         </div>

@@ -10,9 +10,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white border-b border-gray-200">
                     <div class="flex flex-col sm:justify-center items-center py-4 w-3/4 mx-auto">
-
-{{--                    {{dd(Session::get('list'))}}--}}
-
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -32,9 +29,7 @@
                                 </x-button>
                             </div>
                         </form>
-
                     </div>
-
                 </div>
             </div>
         </div>
