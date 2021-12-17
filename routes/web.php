@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\QueuelistController;
 use App\Models\Genre;
 use App\Models\Playlist;
 use App\Models\Song;
@@ -32,6 +33,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/genres', [GenreController::class, 'index'])->name('genres');
 Route::get('/songs', [SongController::class, 'index'])->name('songs');
+Route::get('/queuelist', [QueuelistController::class, 'index'])->name('queuelist');
 
 Route::get('genres/{genre}', function (Genre $genre) {
     return view('songs', [
@@ -39,12 +41,6 @@ Route::get('genres/{genre}', function (Genre $genre) {
     ]);
 });
 
-Route::get('/queuelist', function () {
-    return view('queuelist', [
-        'songs' => Song::all(),
-        'genres' => Genre::all()
-    ]);
-})->name('queuelist');
 
 Route::get('/playlists', function () {
     return view('playlists', [
