@@ -15,6 +15,4 @@ class Song extends Model
     {
         return $this->belongsTo(Genre::class);
     }
-
-
 }
