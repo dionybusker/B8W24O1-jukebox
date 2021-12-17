@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\PlaylistClass;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use App\Models\Song;
@@ -15,9 +16,11 @@ use App\Http\Controllers\Controller;
 class PlaylistController extends Controller
 {
     public function index() {
+        $userId = Auth::user()->id;
+
 //        $songs = Song::get();
 //        $genres = Genre::get();
-        $playlists = Playlist::get();
+        $playlists = Playlist::where('user_id', $userId)->get();
 
         return view('playlists', [
             //'songs' => $songs,
