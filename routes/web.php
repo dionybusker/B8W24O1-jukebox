@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GenreController;
 use App\Models\Genre;
 use App\Models\Playlist;
 use App\Models\Song;
@@ -22,12 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/genres', function () {
-    return view('genres', [
-        'genres' => Genre::all()
-    ]);
-})->name('genres');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -35,6 +30,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
+Route::get('/genres', [GenreController::class, 'index'])->name('genres');
 Route::get('/songs', [SongController::class, 'index'])->name('songs');
 
 Route::get('genres/{genre}', function (Genre $genre) {

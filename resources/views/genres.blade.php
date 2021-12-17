@@ -32,6 +32,9 @@
                     </x-table.table>
                 </div>
             </div>
+
+            <!-- pagination -->
+            {{ $genres->links() }}
         </div>
     </div>
 </x-app-layout>
