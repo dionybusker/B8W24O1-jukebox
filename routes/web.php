@@ -55,10 +55,10 @@ Route::post('/save-list', [PlaylistController::class, 'store']);
 Route::get('/songs/{songId}', [PlaylistController::class, 'create']);
 Route::post('/songs/{songId}', [PlaylistController::class, 'session']);
 Route::get('/queuelist/{songId}', [PlaylistController::class, 'create']);
-Route::post('/queuelist/delete/{songId}', [PlaylistController::class, 'delete']);
+Route::post('/queuelist/delete/{songId}', [QueuelistController::class, 'delete']);
 
-//Route::get('/playlist/{playlistId}', [PlaylistController::class, 'create']);
-//Route::post('/playlist/delete/{playlistId}', [PlaylistController::class, 'delete']);
+Route::get('/playlists/{playlistId}', [PlaylistController::class, 'create']);
+Route::post('/playlists/delete/{playlistId}', [PlaylistController::class, 'delete']);
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);
 //Route::post('/songs/{id}', [SongController::class, 'store']);
