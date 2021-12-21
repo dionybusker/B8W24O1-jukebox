@@ -29,7 +29,7 @@
 {{--                                    </form>--}}
 {{--                                </x-table.td>--}}
                                 <x-table.td>
-                                    <form action="" method="post">
+                                    <form action="playlists/delete/{{ $playlist['id'] }}" method="post">
                                         @csrf
                                         <button class="w-1/2 bg-red-600 hover:bg-red-500 rounded rounded-md text-white text-center py-1">
                                             <i class="fas fa-trash-alt"></i>

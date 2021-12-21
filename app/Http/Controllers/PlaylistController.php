@@ -72,12 +72,19 @@ class PlaylistController extends Controller
         return redirect('songs');
     }
 
-    public function delete($songId)
+    public function delete($playlistId)
     {
-        $playlist = new PlaylistClass();
+        $playlist = Playlist::find($playlistId);
+        $playlistSongs = PlaylistSong::where('playlist_id', $playlistId)->get();
 
-        $playlist->delete($songId);
+        foreach ($playlistSongs as $playlistSong) {
+            if ($playlistSong->playlist_id == $playlistId) {
+                $playlistSong->delete($playlistId);
+            }
+        }
 
-        return redirect('queuelist');
+        $playlist->delete($playlistId);
+
+        return redirect('playlists');
     }
 }
