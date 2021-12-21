@@ -42,15 +42,6 @@ Route::get('genres/{genre}', function (Genre $genre) {
     ]);
 });
 
-
-//Route::get('/playlists', function () {
-//    return view('playlists', [
-////        'songs' => Song::all(),
-////        'genres' => Genre::all()
-//        'playlists' => Playlist::all()
-//    ]);
-//})->name('playlists');
-
 //Route::get("/songs/add/{song}", [
 //    PlaylistController::class, 'store'
 //]);
