@@ -29,6 +29,14 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function show($playlistId) {
+        $playlist = Playlist::where('id', $playlistId)->with('playlistSong.song')->get();
+
+        return view('playlist', [
+            'playlist' => $playlist
+        ]);
+    }
+
     public function create()
     {
         return view('songs');

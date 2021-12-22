@@ -35,6 +35,7 @@ Route::get('/genres', [GenreController::class, 'index'])->name('genres');
 Route::get('/songs', [SongController::class, 'index'])->name('songs');
 Route::get('/queuelist', [QueuelistController::class, 'index'])->name('queuelist');
 Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
+Route::get('/playlists/{playlistId}', [PlaylistController::class, 'show'])->name('playlist');
 
 Route::get('genres/{genre}', function (Genre $genre) {
     return view('songs', [
@@ -57,7 +58,7 @@ Route::post('/songs/{songId}', [PlaylistController::class, 'session']);
 Route::get('/queuelist/{songId}', [PlaylistController::class, 'create']);
 Route::post('/queuelist/delete/{songId}', [QueuelistController::class, 'delete']);
 
-Route::get('/playlists/{playlistId}', [PlaylistController::class, 'create']);
+Route::get('/playlists/create/{playlistId}', [PlaylistController::class, 'create']);
 Route::post('/playlists/delete/{playlistId}', [PlaylistController::class, 'delete']);
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);

@@ -14,7 +14,7 @@
                         @foreach ($playlists as $playlist)
                             <tr class="whitespace-nowrap">
                                 <x-table.td>
-                                    <a href="#">
+                                    <a href="playlists/{{ $playlist['id'] }}">
                                         {{ $playlist->name }}
                                     </a>
                                 </x-table.td>
