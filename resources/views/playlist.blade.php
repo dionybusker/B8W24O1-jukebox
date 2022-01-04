@@ -1,11 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between">
-            <h2 class="inline-block font-semibold text-xl text-gray-800 leading-tight">
-                @foreach ($playlist as $data)
+            @foreach ($playlist as $data)
+                <h2 class="inline-block font-semibold text-xl text-gray-800 leading-tight">
                     {{ $data->name }}
-                @endforeach
-            </h2>
+                </h2>
+
+                @auth
+                    <x-corner-button>
+                        <a href="/update-list/{{ $data->id }}">
+                            {{ __('Change name') }}
+                        </a>
+                    </x-corner-button>
+                @endauth
+            @endforeach
         </div>
     </x-slot>
 
@@ -26,7 +34,7 @@
                                 <p><span class="font-semibold">Artist:</span> {{ $playlistSong->song->artist }}</p>
                                 <p><span class="font-semibold">Length:</span> {{ $playlistSong->song->length }}</p>
                             </div>
-{{--{{dd($data->id)}}--}}
+
                             <form action="deleteSongFromPlaylist/{{ $data->id }}/{{ $playlistSong->song->id }}" method="post">
                                 @csrf
                                 <div class="w-full flex text-sm uppercase font-semibold">
