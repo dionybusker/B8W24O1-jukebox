@@ -36,11 +36,9 @@
 
                         <form action="{{ route('songs') }}/{{ $song->id }}" method="post">
                             @csrf
-                            <div class="w-full flex text-sm uppercase font-semibold">
-                                <button class="w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-1">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-1">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
