@@ -26,15 +26,15 @@
                                 <p><span class="font-semibold">Artist:</span> {{ $playlistSong->song->artist }}</p>
                                 <p><span class="font-semibold">Length:</span> {{ $playlistSong->song->length }}</p>
                             </div>
-
-{{--                            <form action="{{ route('songs') }}/{{ $playlistSong->song->id }}" method="post">--}}
-{{--                                @csrf--}}
-{{--                                <div class="w-full flex text-sm uppercase font-semibold">--}}
-{{--                                    <button class="w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-1">--}}
-{{--                                        <i class="fas fa-plus"></i>--}}
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                            </form>--}}
+{{--{{dd($data->id)}}--}}
+                            <form action="deleteSongFromPlaylist/{{ $data->id }}/{{ $playlistSong->song->id }}" method="post">
+                                @csrf
+                                <div class="w-full flex text-sm uppercase font-semibold">
+                                    <button class="w-full bg-red-600 hover:bg-red-500 text-white text-center py-1">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 @endforeach

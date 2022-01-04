@@ -60,6 +60,7 @@ Route::post('/queuelist/delete/{songId}', [QueuelistController::class, 'delete']
 
 Route::get('/playlists/create/{playlistId}', [PlaylistController::class, 'create']);
 Route::post('/playlists/delete/{playlistId}', [PlaylistController::class, 'delete']);
+Route::post('/playlists/deleteSongFromPlaylist/{playlistId}/{songId}', [PlaylistController::class, 'deleteSongFromPlaylist']);
 
 //Route::get('/songs/{id}', [SongController::class, 'create']);
 //Route::post('/songs/{id}', [SongController::class, 'store']);

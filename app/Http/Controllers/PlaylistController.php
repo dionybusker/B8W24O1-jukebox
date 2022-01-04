@@ -22,6 +22,16 @@ class PlaylistController extends Controller
 //        $genres = Genre::get();
         $playlists = Playlist::where('user_id', $userId)->get();
 
+//        dd($playlists);
+
+//        foreach ($playlists as $pl) {
+//            $count = $pl->id;
+//        }
+
+        $count = $this->countSongs($playlists);
+
+//        dd($count);
+
         return view('playlists', [
             //'songs' => $songs,
             //'genres' => $genres,
@@ -94,5 +104,40 @@ class PlaylistController extends Controller
         $playlist->delete($playlistId);
 
         return redirect('playlists');
+    }
+
+    public function deleteSongFromPlaylist($playlistId, $songId) {
+        $playlistSongs = PlaylistSong::where('playlist_id', $playlistId)->get();
+
+        foreach ($playlistSongs as $playlistSong) {
+            if ($playlistSong->playlist_id == $playlistId && $playlistSong->song_id == $songId) {
+                $playlistSong->delete($songId);
+            }
+        }
+
+        return redirect('playlists/' . $playlistId);
+    }
+
+    public function countSongs($playlists) {
+//        dd($playlists);
+
+//        $songs = Song::get();
+
+        foreach ($playlists as $playlist) {
+            $pl = Playlist::find($playlist->id);
+            $plSongs = PlaylistSong::where('playlist_id', $pl->id)->get();
+
+//            foreach ($plSongs as $plSong) {
+//                $songs = Song::where('id', $plSong->id)->get();
+//                dd($songs);
+//            }
+
+
+
+        }
+
+//        $playlist = Playlist::find($playlistId);
+
+//        return Playlist::find($playlistId);
     }
 }
