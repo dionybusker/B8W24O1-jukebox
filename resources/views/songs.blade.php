@@ -7,23 +7,23 @@
                 {{ __('Songs') }}
             </h2>
 
-            <x-genre-dropdown>
+            <x-dropdown>
                 <x-slot name="trigger">
                     <x-corner-button>
                         {{ isset($currentGenre) ? ucwords($currentGenre->name) : 'Genres' }}
                     </x-corner-button>
                 </x-slot>
 
-                <x-genre-dropdown-item href="/">
+                <x-dropdown-item href="/">
                     All
-                </x-genre-dropdown-item>
+                </x-dropdown-item>
 
                 @foreach ($genres as $genre)
-                    <x-genre-dropdown-item href="/?genre={{ $genre->name }}">
+                    <x-dropdown-item href="/?genre={{ $genre->name }}">
                         {{ ucwords($genre->name) }}
-                    </x-genre-dropdown-item>
+                    </x-dropdown-item>
                 @endforeach
-            </x-genre-dropdown>
+            </x-dropdown>
         </div>
     </x-slot>
 
