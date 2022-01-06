@@ -8,7 +8,7 @@
 
                 @auth
                     <x-corner-button>
-                        <a href="/update-list/{{ $data->id }}">
+                        <a href="/playlists/{{ $data->id }}/edit">
                             {{ __('Change name') }}
                         </a>
                     </x-corner-button>

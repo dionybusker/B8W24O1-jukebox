@@ -82,6 +82,24 @@ class PlaylistController extends Controller
         return redirect('playlists');
     }
 
+    public function edit(Playlist $playlist) {
+        return view('edit', ['playlist' => $playlist]);
+    }
+
+    public function update(Playlist $playlist) {
+        $attributes = request()->validate([
+            'name' => 'required'
+        ]);
+
+        $playlist->update($attributes);
+
+//        $pl = $request->all();
+
+//        Playlist::find($playlist->id)->update($pl);
+
+        return redirect('playlists/' . $playlist->id);
+    }
+
     public function session($songId)
     {
         $playlist = new PlaylistClass();
