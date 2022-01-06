@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Genre;
 use App\Models\Song;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -9,10 +10,13 @@ use Illuminate\Support\Facades\DB;
 class SongController extends Controller
 {
     public function index() {
-        $songs = Song::with('genre')->paginate(12);
+//        $songs = Song::with('genre')->paginate(12);
 
         return view('songs', [
-            'songs' => $songs
+            'genres' => Genre::get(),
+            'songs' => Song::latest()->filter(
+                request(['genre'])
+            )->paginate(12)->withQueryString()
         ]);
     }
 
