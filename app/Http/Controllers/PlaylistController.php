@@ -52,17 +52,41 @@ class PlaylistController extends Controller
         return view('songs');
     }
 
+    public function saveList() {
+        $userId = Auth::user()->id;
+        $playlists = Playlist::where('user_id', $userId)->get();
+
+        return view('save-list', [
+            'playlists' => $playlists
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required_without:list'],
+            'list' => ['required_without:name']
         ]);
 
-        $playlist = Playlist::create([
-            'user_id' => $request->user()->id,
-            'name' => $request->name,
-        ]);
+        if ($request->name != null) {
+            $playlist = Playlist::create([
+                'user_id' => $request->user()->id,
+                'name' => $request->name,
+            ]);
 
+            $this->addSongsToList($playlist);
+        }
+
+        if ($request->list != "None") {
+            $playlist = Playlist::find($request->list);
+
+            $this->addSongsToList($playlist);
+        }
+
+        return redirect('playlists');
+    }
+
+    public function addSongsToList ($playlist) {
         $list = Session::pull('list');
         $songs = Song::get();
 
@@ -78,8 +102,6 @@ class PlaylistController extends Controller
                 ]);
             }
         }
-
-        return redirect('playlists');
     }
 
     public function edit(Playlist $playlist) {

@@ -45,10 +45,7 @@ Route::get('genres/{genre}', function (Genre $genre) {
 //    PlaylistController::class, 'store'
 //]);
 
-Route::get('/save-list', function() {
-    return view('save-list');
-})->name('save-list');
-
+Route::get('/save-list', [PlaylistController::class, 'saveList'])->name('save-list');
 Route::post('/save-list', [PlaylistController::class, 'store']);
 
 
