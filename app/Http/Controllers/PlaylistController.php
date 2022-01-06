@@ -22,20 +22,13 @@ class PlaylistController extends Controller
 //        $genres = Genre::get();
         $playlists = Playlist::where('user_id', $userId)->get();
 
-//        dd($playlists);
-
-//        foreach ($playlists as $pl) {
-//            $count = $pl->id;
-//        }
-
         $count = $this->countSongs($playlists);
-
-//        dd($count);
 
         return view('playlists', [
             //'songs' => $songs,
             //'genres' => $genres,
-            'playlists' => $playlists
+            'playlists' => $playlists,
+            'count' => $count
         ]);
     }
 
@@ -159,25 +152,10 @@ class PlaylistController extends Controller
     }
 
     public function countSongs($playlists) {
-//        dd($playlists);
+        $data = PlaylistSong::groupBy('playlist_id')
+            ->selectRaw('count(*) as total, playlist_id')
+            ->get();
 
-//        $songs = Song::get();
-
-        foreach ($playlists as $playlist) {
-            $pl = Playlist::find($playlist->id);
-            $plSongs = PlaylistSong::where('playlist_id', $pl->id)->get();
-
-//            foreach ($plSongs as $plSong) {
-//                $songs = Song::where('id', $plSong->id)->get();
-//                dd($songs);
-//            }
-
-
-
-        }
-
-//        $playlist = Playlist::find($playlistId);
-
-//        return Playlist::find($playlistId);
+        return $data;
     }
 }

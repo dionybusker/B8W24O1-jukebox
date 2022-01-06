@@ -18,7 +18,13 @@
                                         {{ $playlist->name }}
                                     </a>
                                 </x-table.td>
-                                <x-table.td><!-- total songs --></x-table.td>
+                                <x-table.td>
+                                    @foreach ($count as $c)
+                                        @if ($playlist->id == $c->playlist_id)
+                                            {{ $c->total }}
+                                        @endif
+                                    @endforeach
+                                </x-table.td>
                                 <x-table.td><!-- total length --></x-table.td>
 {{--                                <x-table.td>--}}
 {{--                                    <form action="" method="post">--}}
