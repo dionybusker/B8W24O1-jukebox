@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white border-b border-gray-200">
 {{--                    {{ dd($playlists) }}--}}
-                    <x-table.table :headers="['Name', 'Total songs', 'Total length', {{-- 'Details', --}} 'Delete playlist']">
+                    <x-table.table :headers="['Name', 'Total songs', 'Total duration', {{-- 'Details', --}} 'Delete playlist']">
                         @foreach ($playlists as $playlist)
                             <tr class="whitespace-nowrap">
                                 <x-table.td>
@@ -19,13 +19,34 @@
                                     </a>
                                 </x-table.td>
                                 <x-table.td>
+{{--                                    {{ dd($count) }}--}}
                                     @foreach ($count as $c)
                                         @if ($playlist->id == $c->playlist_id)
                                             {{ $c->total }}
                                         @endif
                                     @endforeach
                                 </x-table.td>
-                                <x-table.td><!-- total length --></x-table.td>
+                                <x-table.td>
+{{--                                    {{ dd($totalDuration) }}--}}
+{{--                                    @foreach ($totalDuration as $td)--}}
+{{--                                        {{ dd($td) }}--}}
+                                        @if ($playlist->id == $totalDuration['data'])
+                                            {{ $totalDuration['length'] }}
+                                        @endif
+{{--                                    @endforeach--}}
+
+
+
+                                    <!-- total length -->
+{{--                                    {{ dd($totalDuration) }}--}}
+{{--                                    @foreach ($totalDuration as $td)--}}
+{{--                                        {{ dd($totalDuration['data']) }}--}}
+{{--                                        {{dd($td->playlist_id)}}--}}
+{{--                                        @if ($playlist->id == $td->playlist_id)--}}
+{{--                                            {{ $totalDuration['length'] }}--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
+                                </x-table.td>
 {{--                                <x-table.td>--}}
 {{--                                    <form action="" method="post">--}}
 {{--                                        @csrf--}}

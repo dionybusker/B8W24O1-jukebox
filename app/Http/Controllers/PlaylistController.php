@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\PlaylistClass;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+//use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
@@ -22,13 +23,23 @@ class PlaylistController extends Controller
 //        $genres = Genre::get();
         $playlists = Playlist::where('user_id', $userId)->get();
 
-        $count = $this->countSongs($playlists);
+        $count = $this->countSongs();
+//        $this->calculateDuration();
+//        $totalDuration = 0;
+
+//        foreach ($playlists as $playlist) {
+//            dd($playlist);
+            $totalDuration = $this->calculateDuration();
+//        }
+
+//        dd($totalDuration);
 
         return view('playlists', [
             //'songs' => $songs,
             //'genres' => $genres,
             'playlists' => $playlists,
-            'count' => $count
+            'count' => $count,
+            'totalDuration' => $totalDuration
         ]);
     }
 
@@ -151,11 +162,77 @@ class PlaylistController extends Controller
         return redirect('playlists/' . $playlistId);
     }
 
-    public function countSongs($playlists) {
+    public function countSongs() {
         $data = PlaylistSong::groupBy('playlist_id')
             ->selectRaw('count(*) as total, playlist_id')
             ->get();
 
         return $data;
     }
+
+    public function calculateDuration()
+    {
+        $newData = [];
+        $plid = '';
+
+        $data = PlaylistSong::groupBy('playlist_id')
+            ->selectRaw('count(id) as total, playlist_id')
+            ->get();
+
+//        dd($data);
+//        dd($playlist);
+//        foreach ($playlist as $pl) {
+//            dd($playlist);
+
+//        foreach ($data as $d) {
+//            dd($d);
+            $length = 0;
+//            dd($data);
+
+            $playlistSongs = PlaylistSong::where('playlist_id', $data[3]->playlist_id)->get();
+
+            foreach ($playlistSongs as $playlistSong) {
+                $plid = $playlistSong->playlist_id;
+
+//                dd($playlistSong->playlist_id);
+                $songs = Song::where('id', $playlistSong->song_id)->get();
+
+                foreach ($songs as $song) {
+                    $length += $this->timeToSeconds($song->length);
+
+                }
+                $newData = [
+                    'data' => $plid,
+                    'length' => $length
+                ];
+//                dd($newData);
+            }
+
+            dd($newData);
+            return $newData;
+//        }
+//        dd($newData);
+
+
+    }
+
+
+    public function timeToSeconds($time) {
+        $parts = explode(':', $time);
+
+//        dd($parts[0]*60 + $parts[1]);
+
+        return $parts[0]*60 + $parts[1];
+    }
+
+    public function secondsToTime($seconds) {
+        $minutes = floor($seconds / 60);
+//        dd($minutes);
+
+        $seconds = ($seconds % 60);
+
+        return sprintf('%02d:%02d', $minutes, $seconds);
+    }
+
+
 }
