@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Classes\PlaylistClass;
 use App\Models\Genre;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use App\Models\Song;
@@ -59,24 +59,28 @@ class PlaylistController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required_without:list'],
-            'list' => ['required_without:name']
-        ]);
-
-        if ($request->name != null) {
-            $playlist = Playlist::create([
-                'user_id' => $request->user()->id,
-                'name' => $request->name,
+        if (Session::get('list') != null) {
+            $request->validate([
+                'name' => ['required_without:list'],
+                'list' => ['required_without:name']
             ]);
 
-            $this->addSongsToList($playlist);
-        }
+            if ($request->name != null) {
+                $playlist = Playlist::create([
+                    'user_id' => $request->user()->id,
+                    'name' => $request->name,
+                ]);
 
-        if ($request->list != "None") {
-            $playlist = Playlist::find($request->list);
+                $this->addSongsToList($playlist);
+            } elseif ($request->list != "None") {
+                $playlist = Playlist::find($request->list);
 
-            $this->addSongsToList($playlist);
+                $this->addSongsToList($playlist);
+            } else {
+                return Redirect::back()->withErrors(['msg' => 'Give a name to this new playlist', '' => 'Or add your queuelist to an existing playlist']);
+            }
+        } else {
+            return Redirect::back()->withErrors(['msg' => 'You have to add songs to your queuelist']);
         }
 
         return redirect('playlists');
