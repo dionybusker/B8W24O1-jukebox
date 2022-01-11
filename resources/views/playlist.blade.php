@@ -3,7 +3,7 @@
         <div class="flex justify-between">
             @foreach ($playlist as $data)
                 <h2 class="inline-block font-semibold text-xl text-gray-800 leading-tight">
-                    {{ $data->name }}
+                    <span class="font-bold text-blue-600">{{ $data->name }}</span> - duration (min) {{ $totalDuration['length'] }}
                 </h2>
 
                 @auth
