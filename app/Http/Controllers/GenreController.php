@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
     public function index() {
-        $genres = Genre::latest()->paginate(10);
+        $genres = Genre::latest()->paginate(50);
 
         return view('genres', [
             'genres' => $genres
