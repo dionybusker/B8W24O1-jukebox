@@ -19,6 +19,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white border-b border-gray-200">
+{{--                    {{ dd(Session::get('list')) }}--}}
+                    @if (Session::has('list'))
+
                     <x-table.table :headers="['Name', 'Genre', 'Artist', 'Length', 'Remove from queue']">
                         @if (Session::has('list'))
                             @foreach ($songs as $song)
@@ -44,6 +47,13 @@
                             @endforeach
                         @endif
                     </x-table.table>
+                    @else
+                        <div>
+                            <p class="py-2 text-center">
+                                Add songs to your queuelist!
+                            </p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
