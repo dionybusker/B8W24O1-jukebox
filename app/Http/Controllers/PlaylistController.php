@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Classes\PlaylistClass;
-use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests;
 use App\Models\Song;
 use App\Models\Playlist;
 use App\Models\PlaylistSong;
-use App\Http\Controllers\Controller;
 
 class PlaylistController extends Controller
 {
