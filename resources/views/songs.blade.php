@@ -44,7 +44,18 @@
                             <p><span class="font-semibold">Length:</span> {{ $song->length }}</p>
                         </div>
 
-                        <form action="{{ route('songs') }}/{{ $song->id }}" method="post">
+{{--                        {{ dd(Request::url()) }}--}}
+{{--                        {{ dd(request()->route('playlistId')) }}--}}
+
+                        @if (Request::url() == route('songs'))
+                            songs
+                            <form action="{{ route('songs') }}/{{ $song->id }}" method="post">
+                        @elseif (Request::url() == (route('playlists').'/'.request()->route('playlistId').'/addSongs'))
+                            songs for playlist
+                            <form action="{{ route('playlists') }}/{{ request()->route('playlistId') }}/addSongs/{{ $song->id }}" method="post">
+                        @endif
+
+{{--                        <form action="{{ route('songs') }}/{{ $song->id }}" method="post">--}}
                             @csrf
                             <button class="w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-1">
                                 <i class="fas fa-plus"></i>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Genre;
+use App\Models\PlaylistSong;
 use App\Models\Song;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;

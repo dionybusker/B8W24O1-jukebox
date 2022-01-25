@@ -59,28 +59,29 @@ class PlaylistController extends Controller
 
     public function store(Request $request)
     {
-        if (Session::get('list') != null) {
-            $request->validate([
-                'name' => ['required_without:list'],
-                'list' => ['required_without:name']
-            ]);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
 
-            if ($request->name != null) {
-                $playlist = Playlist::create([
-                    'user_id' => $request->user()->id,
-                    'name' => $request->name,
+        $playlist = Playlist::create([
+            'user_id' => $request->user()->id,
+            'name' => $request->name,
+        ]);
+
+        $list = Session::pull('list');
+        $songs = Song::get();
+
+        foreach ($songs as $song) {
+            $key = array_search($song->id, $list);
+
+            if ($key !== false) {
+                $listSong = $list[$key];
+
+                PlaylistSong::create([
+                    'playlist_id' => $playlist->id,
+                    'song_id' => $listSong,
                 ]);
-
-                $this->addSongsToList($playlist);
-            } elseif ($request->list != "None") {
-                $playlist = Playlist::find($request->list);
-
-                $this->addSongsToList($playlist);
-            } else {
-                return Redirect::back()->withErrors(['msg' => 'Give a name to this new playlist', '' => 'Or add your queuelist to an existing playlist']);
             }
-        } else {
-            return Redirect::back()->withErrors(['msg' => 'You have to add songs to your queuelist']);
         }
 
         return redirect('playlists');
@@ -102,6 +103,15 @@ class PlaylistController extends Controller
                 ]);
             }
         }
+    }
+
+    public function addSongsToPlaylist ($playlistId, $songId) {
+        PlaylistSong::create([
+            'playlist_id' => $playlistId,
+            'song_id' => $songId
+        ]);
+
+        return redirect('playlists/' . $playlistId);
     }
 
     public function edit(Playlist $playlist) {

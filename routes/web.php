@@ -35,6 +35,9 @@ Route::get('/queuelist', [QueuelistController::class, 'index'])->name('queuelist
 Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
 Route::get('/playlists/{playlistId}', [PlaylistController::class, 'show'])->name('playlist');
 
+Route::get('playlists/{playlistId}/addSongs', [SongController::class, 'index']);
+Route::post('playlists/{playlistId}/addSongs/{songId}', [PlaylistController::class, 'addSongsToPlaylist']);
+
 Route::get('genres/{genre}', function (Genre $genre) {
     return view('songs', [
         'songs' => $genre->songs

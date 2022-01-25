@@ -22,7 +22,7 @@
             <div class="lg:w-2/3 w-full mx-auto flex items-center lg:grid lg:grid-cols-4">
                 <div class="p-2">
                     <div class=" rounded-lg overflow-hidden shadow-lg border border-gray-200">
-                        <a href="/songs">
+                        <a href="/playlists/{{ $data->id }}/addSongs">
                             <div class="bg-gray-200 hover:bg-gray-300 text-gray-300 hover:text-gray-200 px-4 pt-11 overflow-auto h-48 text-center text-8xl">
                                 <i class="fas fa-plus"></i>
                             </div>
