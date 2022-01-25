@@ -15,7 +15,7 @@
                         @foreach ($genres as $genre)
                             <div class="p-2">
                                 <div class="space-x-2 px-4 pt-2">
-                                    <a href="/?genre={{ $genre->id }}" class="px-3 py-0.5 bg-white border border-blue-500 rounded-full text-blue-400 hover:bg-blue-100 hover:text-blue-500 text-xs uppercase font-semibold">
+                                    <a href="/?genre={{ $genre->name }}" class="px-3 py-0.5 bg-white border border-blue-500 rounded-full text-blue-400 hover:bg-blue-100 hover:text-blue-500 text-xs uppercase font-semibold">
                                         {{ $genre->name }}
                                     </a>
                                 </div>
