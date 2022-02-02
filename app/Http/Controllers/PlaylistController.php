@@ -16,15 +16,11 @@ class PlaylistController extends Controller
     public function index() {
         $userId = Auth::user()->id;
 
-//        $songs = Song::get();
-//        $genres = Genre::get();
         $playlists = Playlist::where('user_id', $userId)->get();
 
         $count = $this->countSongs();
 
         return view('playlists', [
-            //'songs' => $songs,
-            //'genres' => $genres,
             'playlists' => $playlists,
             'count' => $count,
         ]);
